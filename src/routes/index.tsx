@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import {
   Phone,
   Mail,
@@ -8,21 +8,45 @@ import {
   Facebook,
   Instagram,
   Leaf,
-  Wind,
-  Sun,
   CalendarCheck,
   MessageCircle,
   Sparkles,
   ArrowRight,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 
-import heroImg from "@/assets/hero-custom.jpg";
-import mhbotImg from "@/assets/mhbot-nasa.jpg";
-import redlightImg from "@/assets/redlight-custom.jpg";
+import heroAsset from "@/assets/hero-custom.png.asset.json";
 import leavesBg from "@/assets/leaves-bg.jpg";
+import galKomora from "@/assets/galerija-komora.jpg.asset.json";
+import galCentar from "@/assets/galerija-centar.jpg.asset.json";
+import galCrvena2 from "@/assets/galerija-crvena-2.jpg.asset.json";
+
+const heroImg = heroAsset.url;
 
 export const Route = createFileRoute("/")({
   component: Home,
+  head: () => ({
+    title: "Зошто да не? | Рехабилитационен центар",
+    meta: [
+      {
+        name: "description",
+        content:
+          "Рехабилитационен центар Зошто да не? нуди комбинирана хипербарична кислородна терапија и биофотомодулација по достапни цени.",
+      },
+      {
+        property: "og:title",
+        content: "Зошто да не? | Рехабилитационен центар",
+      },
+      {
+        property: "og:description",
+        content:
+          "Рехабилитационен центар Зошто да не? нуди комбинирана хипербарична кислородна терапија и биофотомодулација по достапни цени.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
 });
 
 function Home() {
@@ -31,7 +55,7 @@ function Home() {
       <Nav />
       <Hero />
       <About />
-      <Services />
+      <Therapy />
       <HowItWorks />
       <Contact />
       <Footer />
@@ -51,7 +75,7 @@ function Nav() {
         </a>
         <nav className="hidden items-center gap-8 text-sm text-muted-foreground md:flex">
           <a href="#za-nas" className="transition-colors hover:text-foreground">За нас</a>
-          <a href="#uslugi" className="transition-colors hover:text-foreground">Услуги</a>
+          <a href="#za-terapija" className="transition-colors hover:text-foreground">За терапија</a>
           <a href="#kako" className="transition-colors hover:text-foreground">Како функционира</a>
           <a href="#kontakt" className="transition-colors hover:text-foreground">Контакт</a>
         </nav>
@@ -67,6 +91,59 @@ function Nav() {
 }
 
 function Hero() {
+  const slides = [
+    {
+      src: heroImg,
+      alt: "Надворешност на рехабилитационниот центар Зошто да не",
+      label: "Надвор од центарот",
+    },
+    {
+      src: galCentar.url,
+      alt: "Внатрешност на рехабилитационниот центар Зошто да не",
+      label: "Внатре во центарот",
+    },
+  ];
+
+  const [index, setIndex] = useState(0);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  const next = () => setIndex((i) => (i + 1) % slides.length);
+  const prev = () => setIndex((i) => (i - 1 + slides.length) % slides.length);
+
+  const resetAutoplay = () => {
+    if (timerRef.current) clearInterval(timerRef.current);
+    timerRef.current = setInterval(next, 6000);
+  };
+
+  useEffect(() => {
+    resetAutoplay();
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
+  }, []);
+
+  const minSwipeDistance = 40;
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+  const onTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    if (Math.abs(distance) > minSwipeDistance) {
+      if (distance > 0) next();
+      else prev();
+      resetAutoplay();
+    }
+    setTouchStart(null);
+    setTouchEnd(null);
+  };
+
   return (
     <section id="pocetok" className="relative overflow-hidden">
       <div
@@ -89,7 +166,7 @@ function Hero() {
           </h1>
           <p className="mt-6 max-w-lg text-lg leading-relaxed text-muted-foreground">
             Рехабилитационен центар посветен на природно закрепнување преку
-            хипербарична кислородна терапија (mHBOT) и биофотомодуларна терапија
+            хипербарична кислородна терапија (HBOT) и биофотомодуларна терапија
             со црвена светлина.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-4">
@@ -101,22 +178,80 @@ function Hero() {
               <ArrowRight className="h-4 w-4" />
             </a>
             <a
-              href="#uslugi"
+              href="#za-terapija"
               className="inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-medium text-foreground transition-colors hover:bg-secondary"
             >
-              Нашите услуги
+              За терапија
             </a>
           </div>
         </div>
-        <div className="relative">
+        <div
+          className="relative select-none"
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
+        >
           <div className="absolute -inset-4 rounded-[2rem] bg-mint/30 blur-2xl" aria-hidden />
-          <img
-            src={heroImg}
-            alt="Внатрешноста на рехабилитационниот центар Зошто да не"
-            width={1600}
-            height={1200}
-            className="relative aspect-[4/3] w-full rounded-[2rem] object-cover shadow-xl"
-          />
+          <div className="relative overflow-hidden rounded-[2rem] bg-muted shadow-xl">
+            <div
+              className="flex transition-transform duration-500 ease-out"
+              style={{ transform: `translateX(-${index * 100}%)` }}
+            >
+              {slides.map((slide) => (
+                <div key={slide.label} className="w-full flex-shrink-0">
+                  <img
+                    src={slide.src}
+                    alt={slide.alt}
+                    width={1600}
+                    height={1000}
+                    className="aspect-[4/3] w-full object-cover"
+                    draggable={false}
+                  />
+                </div>
+              ))}
+            </div>
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full bg-black/40 px-4 py-1.5 text-xs font-medium text-white backdrop-blur-sm">
+              {slides[index].label}
+            </div>
+            <button
+              type="button"
+              aria-label="Претходна слика"
+              onClick={() => {
+                prev();
+                resetAutoplay();
+              }}
+              className="absolute left-3 top-1/2 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full bg-white/80 text-foreground shadow-sm backdrop-blur-sm transition-colors hover:bg-white"
+            >
+              <ChevronLeft className="h-5 w-5" />
+            </button>
+            <button
+              type="button"
+              aria-label="Следна слика"
+              onClick={() => {
+                next();
+                resetAutoplay();
+              }}
+              className="absolute right-3 top-1/2 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full bg-white/80 text-foreground shadow-sm backdrop-blur-sm transition-colors hover:bg-white"
+            >
+              <ChevronRight className="h-5 w-5" />
+            </button>
+            <div className="absolute bottom-4 right-4 flex gap-2">
+              {slides.map((_, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  aria-label={`Слика ${i + 1}`}
+                  onClick={() => {
+                    setIndex(i);
+                    resetAutoplay();
+                  }}
+                  className={`h-2 w-2 rounded-full transition-all ${
+                    i === index ? "bg-white w-5" : "bg-white/60 hover:bg-white/80"
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -126,37 +261,16 @@ function Hero() {
 function About() {
   return (
     <section id="za-nas" className="border-t border-border/50 bg-cream/40">
-      <div className="mx-auto grid max-w-6xl gap-12 px-6 py-24 md:grid-cols-[1fr_1.2fr]">
-        <div>
+      <div className="mx-auto max-w-6xl px-6 py-24">
+        <div className="mx-auto max-w-3xl text-center">
           <span className="text-xs uppercase tracking-[0.2em] text-primary">За нас</span>
           <h2 className="mt-4 font-display text-4xl leading-tight md:text-5xl">
-            Природно, нежно, ефикасно.
+            Мисија достапна за секого.
           </h2>
-        </div>
-        <div className="space-y-5 text-base leading-relaxed text-muted-foreground">
-          <p>
-            „Зошто да не?“ е центар кој верува дека телото има извонредна
-            способност за самоисцелување — потребна му е само вистинската
-            поддршка. Нашата филозофија е фокусирана на неинвазивни методи кои
-            го активираат природниот процес на закрепнување.
-          </p>
-          <p>
-            Со комбинација на хипербарична кислородна терапија и биофотомодуларна
-            терапија со црвена светлина, овозможуваме поддршка за спортисти,
-            лица во рехабилитација и сите кои сакаат подобра енергија, кожа и
-            благосостојба — без агресивни постапки.
-          </p>
-          <div className="grid grid-cols-3 gap-4 pt-4">
-            {[
-              { k: "100%", v: "Неинвазивно" },
-              { k: "2", v: "Терапии" },
-              { k: "12ч", v: "Работно време" },
-            ].map((s) => (
-              <div key={s.v} className="rounded-2xl border border-border/60 bg-background p-4">
-                <div className="font-display text-2xl text-primary">{s.k}</div>
-                <div className="mt-1 text-xs text-muted-foreground">{s.v}</div>
-              </div>
-            ))}
+          <div className="mt-8 rounded-3xl border border-border/60 bg-mint/20 p-8 md:p-10">
+            <p className="text-lg leading-relaxed text-foreground">
+              Мисијата на нашето здружение е да овозможи скапи и напредни терапии по цена достапна за сите граѓани. Веруваме дека пристапот до квалитетна нега за закрепнување не треба да зависи од финансиската состојба на пациентот, туку да биде достапен за секого на кого му е потребен.
+            </p>
           </div>
         </div>
       </div>
@@ -164,107 +278,112 @@ function About() {
   );
 }
 
-function Services() {
+function Therapy() {
   return (
-    <section id="uslugi" className="relative">
+    <section id="za-terapija" className="relative">
       <div className="mx-auto max-w-6xl px-6 py-24">
-        <div className="max-w-2xl">
-          <span className="text-xs uppercase tracking-[0.2em] text-primary">Услуги</span>
+        <div className="max-w-3xl">
+          <span className="text-xs uppercase tracking-[0.2em] text-primary">За терапија</span>
           <h2 className="mt-4 font-display text-4xl leading-tight md:text-5xl">
-            Две терапии. Една цел — вашето закрепнување.
+            Комбинирана терапија за подобро закрепнување.
           </h2>
+          <p className="mt-6 text-base leading-relaxed text-muted-foreground">
+            Терапиите се спроведуваат комбинирано — HBOT и биофотомодулација заедно во рамки на еден третман, во времетраење од 60 до 90 минути, во зависност од здравствената состојба и потребите на пациентот. Комбинацијата овозможува паралелно дејство на два различни механизми на клеточно закрепнување во едно, а третманите ги изведува сертифициран тим за хипербарична медицина.
+          </p>
         </div>
 
         <div className="mt-14 grid gap-8 md:grid-cols-2">
-          <ServiceCard
-            img={mhbotImg}
-            icon={<Wind className="h-5 w-5" />}
-            tag="mHBOT"
-            title="Хипербарична кислородна терапија"
-            desc="Дишење на кислород под благо зголемен притисок што ја подобрува оксигенацијата на ткивата и го забрзува природното закрепнување."
-            bullets={[
-              "Побрзо закрепнување по повреди и напор",
-              "Зголемена оксигенација на клетките",
-              "Поддршка при воспалителни состојби",
-              "Повеќе енергија и подобар сон",
-            ]}
-          />
-          <ServiceCard
-            img={redlightImg}
-            icon={<Sun className="h-5 w-5" />}
-            tag="Red Light"
-            title="Биофотомодуларна терапија"
-            desc="Терапија со црвена и блиско-инфрацрвена светлина што ги стимулира митохондриите и природното обновување на клетките."
-            bullets={[
-              "Закрепнување и обнова на клетките",
-              "Намалување на воспаление и болка",
-              "Поздрава, поеластична кожа",
-              "Подобрување на циркулација",
-            ]}
-            accent
-          />
+          <div className="rounded-3xl border border-border/60 bg-card p-8 shadow-sm transition-all hover:shadow-lg">
+            <div className="text-xs uppercase tracking-wider text-muted-foreground">Месечен пакет</div>
+            <h3 className="mt-2 font-display text-2xl leading-tight">20 терапии</h3>
+            <div className="mt-4">
+              <span className="font-display text-4xl text-primary">18.000</span>
+              <span className="text-lg text-muted-foreground"> денари</span>
+            </div>
+            <p className="mt-2 text-sm text-muted-foreground">месечно</p>
+          </div>
+
+          <div className="rounded-3xl border border-border/60 bg-card p-8 shadow-sm transition-all hover:shadow-lg">
+            <div className="text-xs uppercase tracking-wider text-muted-foreground">Пакет</div>
+            <h3 className="mt-2 font-display text-2xl leading-tight">40 терапии</h3>
+            <div className="mt-4">
+              <span className="font-display text-4xl text-primary">580</span>
+              <span className="text-lg text-muted-foreground"> денари по терапија</span>
+            </div>
+            <p className="mt-2 text-sm text-muted-foreground">Вкупно 23.200 денари · месечно 11.600 денари</p>
+          </div>
+        </div>
+
+        <div className="mt-10 max-w-3xl space-y-3 text-sm leading-relaxed text-muted-foreground">
+          <p>Терапиите се изведуваат од понеделник до петок; саботите и неделите пациентите одмораат.</p>
+          <p>Плаќањето на терапиите се врши однапред, преку уплата на жиро сметка на здружението.</p>
+          <p>Единствениот дополнителен трошок е канила или маска за приклучок на кислород, што ја купувате вие. Ако не можете самостојно да набавите соодветна канила или маска, за 270 денари може ние да ви ја обезбедиме.</p>
+        </div>
+
+        <div className="mt-20 grid gap-8 lg:grid-cols-2">
+          <div className="rounded-3xl border border-border/60 bg-cream/40 p-8 md:p-10">
+            <div className="mb-4 overflow-hidden rounded-2xl border border-border/60">
+              <img
+                src={galKomora.url}
+                alt="Комора за хипербарична кислородна терапија (HBOT)"
+                width={1200}
+                height={800}
+                loading="lazy"
+                className="aspect-[4/3] w-full object-cover"
+              />
+            </div>
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
+              <Sparkles className="h-3 w-3" />
+              Хипербарична кислородна терапија
+            </div>
+            <h3 className="font-display text-2xl leading-tight">Што е HBOT?</h3>
+            <div className="mt-5 space-y-4 text-sm leading-relaxed text-muted-foreground">
+              <p>
+                <strong className="text-foreground">HBOT (хипербарична кислородна терапија)</strong> е неинвазивна терапија во која пациентот вдишува чист кислород во зголемен притисок. Овој притисок го зголемува количеството кислород што влегува во крвта и ткивата, дури и во области со намалена циркулација.
+              </p>
+              <p>
+                Повеќе кислород на клеточно ниво значи подобро создавање енергија (ATP), намалување на воспаленијата, поттикнување на закрепнувањето на рани и поддршка на нервниот систем. Терапијата е безболна, пациентот едноставно седи или лежи во комората и дише нормално.
+              </p>
+              <p>
+                Кај нашите пациенти HBOT најчесто ја користиме како поддршка при закрепнување после операции, повреди, мозочен удар, невролошки состојби, автоимуни проблеми и хроничен замор.
+              </p>
+            </div>
+          </div>
+
+          <div className="rounded-3xl border border-border/60 bg-mint/20 p-8 md:p-10">
+            <div className="mb-4 overflow-hidden rounded-2xl border border-border/60">
+              <img
+                src={galCrvena2.url}
+                alt="Панел за биофотомодуларна терапија со црвена светлина"
+                width={1200}
+                height={800}
+                loading="lazy"
+                className="aspect-[4/3] w-full object-cover"
+              />
+            </div>
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
+              <Sparkles className="h-3 w-3" />
+              Биофотомодулација
+            </div>
+            <h3 className="font-display text-2xl leading-tight">Што е биофотомодуларна терапија?</h3>
+            <div className="mt-5 space-y-4 text-sm leading-relaxed text-muted-foreground">
+              <p>
+                <strong className="text-foreground">Биофотомодуларната терапија</strong>, позната и како терапија со црвена и блиска инфрацрвена светлина, користи специфични бранови должини на светлината за да стимулира митохондриите — „енергетските фабрики“ на клетките.
+              </p>
+              <p>
+                Кога светлината ја апсорбира клетката, се зголемува производството на енергија и се активираат процеси на закрепнување. Ова помага за намалување на воспаленијата, подобрување на циркулацијата, забрзано заздравување на кожата и ткивата, како и намалување на болката.
+              </p>
+              <p>
+                Во нашиот центар биофотомодулацијата се комбинира со HBOT за уште посилен синергетски ефект: повеќе кислород од хипербаричната терапија и подобро искористување на тој кислород преку светлинска стимулација.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
   );
 }
 
-function ServiceCard({
-  img,
-  icon,
-  tag,
-  title,
-  desc,
-  bullets,
-  accent,
-}: {
-  img: string;
-  icon: React.ReactNode;
-  tag: string;
-  title: string;
-  desc: string;
-  bullets: string[];
-  accent?: boolean;
-}) {
-  return (
-    <article className="group overflow-hidden rounded-3xl border border-border/60 bg-card shadow-sm transition-all hover:shadow-lg">
-      <div className="relative aspect-[16/10] overflow-hidden">
-        <img
-          src={img}
-          alt={title}
-          width={1200}
-          height={900}
-          loading="lazy"
-          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-        />
-        <span
-          className={`absolute left-4 top-4 rounded-full px-3 py-1 text-xs font-medium ${
-            accent ? "bg-cream text-teal-deep" : "bg-primary text-primary-foreground"
-          }`}
-        >
-          {tag}
-        </span>
-      </div>
-      <div className="p-7">
-        <div className="flex items-center gap-3">
-          <div className="grid h-10 w-10 place-items-center rounded-full bg-mint/40 text-teal-deep">
-            {icon}
-          </div>
-          <h3 className="font-display text-2xl leading-tight">{title}</h3>
-        </div>
-        <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{desc}</p>
-        <ul className="mt-5 space-y-2 text-sm">
-          {bullets.map((b) => (
-            <li key={b} className="flex items-start gap-2">
-              <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
-              <span>{b}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </article>
-  );
-}
 
 function HowItWorks() {
   const steps = [
@@ -333,6 +452,12 @@ function Contact() {
 
         <div className="mt-14 grid gap-10 lg:grid-cols-[1fr_1.1fr]">
           <div className="space-y-4">
+            <InfoRow
+              icon={<Phone className="h-4 w-4" />}
+              label="Телефон"
+              value="070 384 493"
+              href="tel:+38970384493"
+            />
             <InfoRow
               icon={<Phone className="h-4 w-4" />}
               label="Телефон"
@@ -521,7 +646,7 @@ function Footer() {
             <div className="text-xs uppercase tracking-wider text-muted-foreground">Навигација</div>
             <ul className="mt-3 space-y-2 text-sm">
               <li><a href="#za-nas" className="hover:text-primary">За нас</a></li>
-              <li><a href="#uslugi" className="hover:text-primary">Услуги</a></li>
+              <li><a href="#za-terapija" className="hover:text-primary">За терапија</a></li>
               <li><a href="#kako" className="hover:text-primary">Како функционира</a></li>
               <li><a href="#kontakt" className="hover:text-primary">Контакт</a></li>
             </ul>
