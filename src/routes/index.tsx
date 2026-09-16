@@ -16,11 +16,24 @@ import {
   ChevronRight,
 } from "lucide-react";
 
-import heroImg from "@/assets/hero-custom.png";
+import heroAsset from "@/assets/hero-custom.png";
 import leavesBg from "@/assets/leaves-bg.jpg";
 import galKomora from "@/assets/galerija-komora.jpg";
 import galCentar from "@/assets/galerija-centar.jpg";
 import galCrvena2 from "@/assets/galerija-crvena-2.jpg";
+import gNadvor1 from "@/assets/galerija-nadvor-1.png";
+import gNadvor2 from "@/assets/galerija-nadvor-2.webp";
+import gNadvor3 from "@/assets/galerija-nadvor-3.webp";
+import gVnatre1 from "@/assets/galerija-vnatre-1.webp";
+import gVnatre2 from "@/assets/galerija-vnatre-2.webp";
+import gVnatre3 from "@/assets/galerija-vnatre-3.webp";
+import gSvetlina1 from "@/assets/galerija-svetlina-1.jpg";
+import gSvetlina2 from "@/assets/galerija-svetlina-2.jpg";
+import gKomoraNova from "@/assets/galerija-komora-nova.png";
+
+const heroImg = heroAsset;
+
+import { Gallery } from "@/components/Gallery";
 
 export const Route = createFileRoute("/")({
   component: Home,
@@ -54,9 +67,12 @@ function Home() {
       <Hero />
       <About />
       <Therapy />
+      <NormobaricTherapy />
       <HowItWorks />
+      <Gallery />
       <Contact />
       <Footer />
+
     </div>
   );
 }
@@ -75,6 +91,7 @@ function Nav() {
           <a href="#za-nas" className="transition-colors hover:text-foreground">За нас</a>
           <a href="#za-terapija" className="transition-colors hover:text-foreground">За терапија</a>
           <a href="#kako" className="transition-colors hover:text-foreground">Како функционира</a>
+          <a href="#galerija" className="transition-colors hover:text-foreground">Галерија</a>
           <a href="#kontakt" className="transition-colors hover:text-foreground">Контакт</a>
         </nav>
         <a
@@ -265,10 +282,27 @@ function About() {
           <h2 className="mt-4 font-display text-4xl leading-tight md:text-5xl">
             Мисија достапна за секого.
           </h2>
-          <div className="mt-8 rounded-3xl border border-border/60 bg-mint/20 p-8 md:p-10">
-            <p className="text-lg leading-relaxed text-foreground">
-              Мисијата на нашето здружение е да овозможи скапи и напредни терапии по цена достапна за сите граѓани. Веруваме дека пристапот до квалитетна нега за закрепнување не треба да зависи од финансиската состојба на пациентот, туку да биде достапен за секого на кого му е потребен.
-            </p>
+          <div className="mt-8 space-y-6 text-left">
+            <div className="rounded-3xl border border-border/60 bg-mint/20 p-8 md:p-10">
+              <p className="text-lg leading-relaxed text-foreground">
+                Мисијата на нашето здружение е да овозможи скапи и напредни терапии по цена достапна за сите граѓани. Веруваме дека пристапот до квалитетна нега за закрепнување не треба да зависи од финансиската состојба на пациентот, туку да биде достапен за секого на кого му е потребен.
+              </p>
+            </div>
+            <div className="rounded-3xl border border-border/60 bg-card p-8 md:p-10">
+              <p className="leading-relaxed text-muted-foreground">
+                Центарот „Зошто да не?" постои од желба да понудиме природен, неинвазивен и безбеден начин на закрепнување. Наместо агресивни процедури, ја поддржуваме моќта на кислородот и светлината, два елементи што телото самото ги користи за обнова на клетките.
+              </p>
+            </div>
+            <div className="rounded-3xl border border-border/60 bg-card p-8 md:p-10">
+              <p className="leading-relaxed text-muted-foreground">
+                Секој пациент кај нас е сретнат со внимание, трпение и разбирање. Пред секоја терапија разговараме за вашата состојба, цели и очекувања, за да можеме заедно да го избереме најдобриот протокол. Не брзаме и не оптоваруваме. Создаваме средина во која телото може да се опушти и да закрепне.
+              </p>
+            </div>
+            <div className="rounded-3xl border border-border/60 bg-card p-8 md:p-10">
+              <p className="leading-relaxed text-muted-foreground">
+                Тимот зад терапиите е сертифициран за хипербарична медицина и редовно ги следи најновите насоки во областа на оксигена и биофотомодулациска терапија. Искуството ни кажува дека најдобрите резултати доаѓаат кога стручноста се спои со грижата за човекот. Затоа секоја сесија ја спроведуваме со целосна посветеност и безбедност.
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -285,12 +319,31 @@ function Therapy() {
           <h2 className="mt-4 font-display text-4xl leading-tight md:text-5xl">
             Комбинирана терапија за подобро закрепнување.
           </h2>
-          <p className="mt-6 text-base leading-relaxed text-muted-foreground">
-            Терапиите се спроведуваат комбинирано — HBOT и биофотомодулација заедно во рамки на еден третман, во времетраење од 60 до 90 минути, во зависност од здравствената состојба и потребите на пациентот. Комбинацијата овозможува паралелно дејство на два различни механизми на клеточно закрепнување во едно, а третманите ги изведува сертифициран тим за хипербарична медицина.
-          </p>
+          <div className="mt-6 space-y-4 text-base leading-relaxed text-muted-foreground">
+            <p>
+              Терапиите се спроведуваат комбинирано. HBOT и биофотомодулација се применуваат заедно во рамки на еден третман, во времетраење од 60 до 90 минути, во зависност од здравствената состојба и потребите на пациентот. Комбинацијата овозможува паралелно дејство на два различни механизми на клеточно закрепнување во едно седење, а третманите ги изведува сертифициран тим за хипербарична медицина.
+            </p>
+            <p>
+              Терапијата започнува со биофотомодулација: соодветни панели со црвена и блиска инфрацрвена светлина ја стимулираат кожата и ткивата. Потоа пациентот влегува во хипербарична комора, каде вдишува чист кислород под зголемен, но удобен притисок. На овој начин клетките добиваат повеќе кислород и поттик за подобро искористување на тој кислород.
+            </p>
+            <p>
+              Терапијата е безболна, без операции и без инвазивни процедури. Пациентите едноставно одмараат додека комората нежно ја врши својата работа.
+            </p>
+          </div>
+
         </div>
 
-        <div className="mt-14 grid gap-8 md:grid-cols-2">
+        <div className="mt-14 grid gap-8 md:grid-cols-3">
+          <div className="rounded-3xl border border-border/60 bg-card p-8 shadow-sm transition-all hover:shadow-lg">
+            <div className="text-xs uppercase tracking-wider text-muted-foreground">Старт пакет</div>
+            <h3 className="mt-2 font-display text-2xl leading-tight">10 терапии</h3>
+            <div className="mt-4">
+              <span className="font-display text-4xl text-primary">13.000</span>
+              <span className="text-lg text-muted-foreground"> денари</span>
+            </div>
+            <p className="mt-2 text-sm text-muted-foreground">Идеален за прво запознавање</p>
+          </div>
+
           <div className="rounded-3xl border border-border/60 bg-card p-8 shadow-sm transition-all hover:shadow-lg">
             <div className="text-xs uppercase tracking-wider text-muted-foreground">Месечен пакет</div>
             <h3 className="mt-2 font-display text-2xl leading-tight">20 терапии</h3>
@@ -310,6 +363,7 @@ function Therapy() {
             </div>
             <p className="mt-2 text-sm text-muted-foreground">Вкупно 23.200 денари · месечно 11.600 денари</p>
           </div>
+
         </div>
 
         <div className="mt-10 max-w-3xl space-y-3 text-sm leading-relaxed text-muted-foreground">
@@ -340,11 +394,40 @@ function Therapy() {
                 <strong className="text-foreground">HBOT (хипербарична кислородна терапија)</strong> е неинвазивна терапија во која пациентот вдишува чист кислород во зголемен притисок. Овој притисок го зголемува количеството кислород што влегува во крвта и ткивата, дури и во области со намалена циркулација.
               </p>
               <p>
-                Повеќе кислород на клеточно ниво значи подобро создавање енергија (ATP), намалување на воспаленијата, поттикнување на закрепнувањето на рани и поддршка на нервниот систем. Терапијата е безболна, пациентот едноставно седи или лежи во комората и дише нормално.
+                Повеќе кислород на клеточно ниво значи подобро создавање енергија (ATP), намалување на воспаленијата, поттикнување на закрепнувањето на рани и поддршка на нервниот систем. Терапијата е безболна. Пациентот едноставно седи или лежи во комората и дише нормално, додека притисокот и кислородот ја вршат својата работа.
               </p>
               <p>
-                Кај нашите пациенти HBOT најчесто ја користиме како поддршка при закрепнување после операции, повреди, мозочен удар, невролошки состојби, автоимуни проблеми и хроничен замор.
+                Кај нашите пациенти HBOT најчесто ја користиме како поддршка при закрепнување после операции, повреди, мозочен удар, невролошки состојби, автоимуни проблеми и хроничен замор. Секој третман е прилагоден конкретно кон вашата состојба, а нашите терапевти внимаваат секој момент да помине во мир и безбедност.
               </p>
+              <div className="rounded-2xl bg-mint/20 p-5">
+                <h4 className="mb-3 text-sm font-semibold text-foreground">Најчести примени кај нас:</h4>
+                <ul className="grid gap-2 sm:grid-cols-2">
+                  <li className="flex items-start gap-2 text-sm text-muted-foreground">
+                    <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary" />
+                    Постоперативно закрепнување
+                  </li>
+                  <li className="flex items-start gap-2 text-sm text-muted-foreground">
+                    <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary" />
+                    Спортски повреди и воспаленија
+                  </li>
+                  <li className="flex items-start gap-2 text-sm text-muted-foreground">
+                    <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary" />
+                    Мозочен удар и неврологија
+                  </li>
+                  <li className="flex items-start gap-2 text-sm text-muted-foreground">
+                    <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary" />
+                    Автоимуни состојби
+                  </li>
+                  <li className="flex items-start gap-2 text-sm text-muted-foreground">
+                    <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary" />
+                    Хроничен замор и детоксикација
+                  </li>
+                  <li className="flex items-start gap-2 text-sm text-muted-foreground">
+                    <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary" />
+                    Поддршка на имунитетот
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
 
@@ -366,15 +449,148 @@ function Therapy() {
             <h3 className="font-display text-2xl leading-tight">Што е биофотомодуларна терапија?</h3>
             <div className="mt-5 space-y-4 text-sm leading-relaxed text-muted-foreground">
               <p>
-                <strong className="text-foreground">Биофотомодуларната терапија</strong>, позната и како терапија со црвена и блиска инфрацрвена светлина, користи специфични бранови должини на светлината за да стимулира митохондриите — „енергетските фабрики“ на клетките.
+                <strong className="text-foreground">Биофотомодуларната терапија</strong>, позната и како терапија со црвена и блиска инфрацрвена светлина, користи специфични бранови должини на светлината за да стимулира митохондриите, енергетските централи на клетките.
               </p>
               <p>
                 Кога светлината ја апсорбира клетката, се зголемува производството на енергија и се активираат процеси на закрепнување. Ова помага за намалување на воспаленијата, подобрување на циркулацијата, забрзано заздравување на кожата и ткивата, како и намалување на болката.
               </p>
               <p>
-                Во нашиот центар биофотомодулацијата се комбинира со HBOT за уште посилен синергетски ефект: повеќе кислород од хипербаричната терапија и подобро искористување на тој кислород преку светлинска стимулација.
+                Во нашиот центар биофотомодулацијата се комбинира со HBOT за уште посилен синергетски ефект. Повеќе кислород од хипербаричната терапија и подобро искористување на тој кислород преку светлинска стимулација значат побрзо закрепнување и подобро чувство на свежина.
               </p>
+              <div className="rounded-2xl bg-cream/60 p-5">
+                <h4 className="mb-3 text-sm font-semibold text-foreground">Ефекти што се добиваат од терапијата</h4>
+                <ul className="grid gap-2 sm:grid-cols-2">
+                  <li className="flex items-start gap-2 text-sm text-muted-foreground">
+                    <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary" />
+                    Подобрување на циркулацијата
+                  </li>
+                  <li className="flex items-start gap-2 text-sm text-muted-foreground">
+                    <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary" />
+                    Забрзано заздравување на кожа
+                  </li>
+                  <li className="flex items-start gap-2 text-sm text-muted-foreground">
+                    <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary" />
+                    Намалување на болка и воспаление
+                  </li>
+                  <li className="flex items-start gap-2 text-sm text-muted-foreground">
+                    <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary" />
+                    Стимулација на колаген
+                  </li>
+                  <li className="flex items-start gap-2 text-sm text-muted-foreground">
+                    <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary" />
+                    Релаксација и подобар сон
+                  </li>
+                  <li className="flex items-start gap-2 text-sm text-muted-foreground">
+                    <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary" />
+                    Подобар тонус на лицето
+                  </li>
+                </ul>
+              </div>
             </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function NormobaricTherapy() {
+  return (
+    <section id="normobaricna-terapija" className="border-t border-border/50 bg-cream/40">
+      <div className="mx-auto max-w-6xl px-6 py-24">
+        <div className="max-w-3xl">
+          <span className="text-xs uppercase tracking-[0.2em] text-primary">Нормобарична оксигена терапија</span>
+          <h2 className="mt-4 font-display text-4xl leading-tight md:text-5xl">
+            Чист кислород надвор од комора.
+          </h2>
+          <div className="mt-6 space-y-4 text-lg leading-relaxed text-muted-foreground">
+            <p>
+              <strong className="text-foreground">Нормобаричната оксигена терапија</strong> е седење во пријатна, мирна средина додека дишете чист кислород преку назална канила или маска на нормален атмосферски притисок. За разлика од хипербаричната терапија, тука не влегувате во комора и не чувствувате притисок во ушите. Тоа ја прави терапијата достапна и релаксирана опција за сите возрасни групи.
+            </p>
+            <p>
+              Во нашиот центар оваа терапија ја комбинираме со биофотомодулација. Во текот на 30 минути чистиот кислород се диши истовремено додека светлинските панели со црвена и блиска инфрацрвена светлина ја стимулираат кожата и ткивата. Ефектот е моќна поддршка за клеточна обнова, анти-стрес и подобрување на енергијата.
+            </p>
+            <p>
+              Оваа комбинација е одличен избор за сите кои сакаат природна поддршка за организмот без потреба од влегување во хипербарична комора. Терапијата е безболна, безбедна и може да се зема и поединечно, според вашите потреби и распоред.
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-14 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <div className="rounded-3xl border border-border/60 bg-card p-8 shadow-sm transition-all hover:shadow-lg lg:col-span-1">
+            <div className="text-xs uppercase tracking-wider text-muted-foreground">Поединечен третман</div>
+            <h3 className="mt-2 font-display text-2xl leading-tight">1 терапија</h3>
+            <div className="mt-4">
+              <span className="font-display text-4xl text-primary">370</span>
+              <span className="text-lg text-muted-foreground"> денари</span>
+            </div>
+            <p className="mt-2 text-sm text-muted-foreground">Може да се земе и поединечно</p>
+          </div>
+
+          <div className="rounded-3xl border border-border/60 bg-card p-8 shadow-sm transition-all hover:shadow-lg lg:col-span-2">
+            <div className="text-xs uppercase tracking-wider text-muted-foreground">Пакет</div>
+            <h3 className="mt-2 font-display text-2xl leading-tight">20 терапии</h3>
+            <div className="mt-4">
+              <span className="font-display text-4xl text-primary">7.400</span>
+              <span className="text-lg text-muted-foreground"> денари</span>
+            </div>
+            <p className="mt-2 text-sm text-muted-foreground">Комбинирана нормобарична оксигена терапија + биофотомодулација</p>
+          </div>
+        </div>
+
+
+        <div className="mt-10 grid gap-8 md:grid-cols-2">
+          <div className="rounded-3xl border border-border/60 bg-cream/40 p-8 md:p-10">
+            <h3 className="font-display text-2xl leading-tight">Како се одвива терапијата?</h3>
+            <ol className="mt-5 space-y-3 text-sm leading-relaxed text-muted-foreground">
+              <li className="flex gap-3">
+                <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-semibold text-primary">1</span>
+                Седнете удобно во нашиот третмански простор.
+              </li>
+              <li className="flex gap-3">
+                <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-semibold text-primary">2</span>
+                Поставуваме назална канила или маска за чист кислород.
+              </li>
+              <li className="flex gap-3">
+                <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-semibold text-primary">3</span>
+                30 минути дишете чист кислород на нормален притисок, додека истовремено работи панелот со црвена и блиска инфрацрвена светлина.
+              </li>
+              <li className="flex gap-3">
+                <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-semibold text-primary">4</span>
+                Завршувате со краток разговор и совети за дома.
+              </li>
+            </ol>
+          </div>
+
+          <div className="rounded-3xl border border-border/60 bg-mint/20 p-8 md:p-10">
+            <h3 className="font-display text-2xl leading-tight">За кого е наменета?</h3>
+            <ul className="mt-5 grid gap-2 sm:grid-cols-2">
+              <li className="flex items-start gap-2 text-sm text-muted-foreground">
+                <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary" />
+                Лица со висок стрес и замор
+              </li>
+              <li className="flex items-start gap-2 text-sm text-muted-foreground">
+                <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary" />
+                Спортисти и рекреативци
+              </li>
+              <li className="flex items-start gap-2 text-sm text-muted-foreground">
+                <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary" />
+                Пушачи и лица со детоксикација
+              </li>
+              <li className="flex items-start gap-2 text-sm text-muted-foreground">
+                <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary" />
+                Проблеми со кожа и лице
+              </li>
+              <li className="flex items-start gap-2 text-sm text-muted-foreground">
+                <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary" />
+                Слаб имунитет
+              </li>
+              <li className="flex items-start gap-2 text-sm text-muted-foreground">
+                <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary" />
+                Сите кои сакаат природна нега
+              </li>
+            </ul>
           </div>
         </div>
       </div>
@@ -384,6 +600,7 @@ function Therapy() {
 
 
 function HowItWorks() {
+
   const steps = [
     {
       icon: <CalendarCheck className="h-5 w-5" />,
