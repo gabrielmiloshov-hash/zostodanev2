@@ -528,7 +528,17 @@ function NormobaricTherapy() {
             <p className="mt-2 text-sm text-muted-foreground">Може да се земе и поединечно</p>
           </div>
 
-          <div className="rounded-3xl border border-border/60 bg-card p-8 shadow-sm transition-all hover:shadow-lg lg:col-span-2">
+          <div className="rounded-3xl border border-border/60 bg-card p-8 shadow-sm transition-all hover:shadow-lg lg:col-span-1">
+            <div className="text-xs uppercase tracking-wider text-muted-foreground">Пакет</div>
+            <h3 className="mt-2 font-display text-2xl leading-tight">10 терапии</h3>
+            <div className="mt-4">
+              <span className="font-display text-4xl text-primary">3.700</span>
+              <span className="text-lg text-muted-foreground"> денари</span>
+            </div>
+            <p className="mt-2 text-sm text-muted-foreground">Комбинирана нормобарична оксигена терапија + биофотомодулација</p>
+          </div>
+
+          <div className="rounded-3xl border border-border/60 bg-card p-8 shadow-sm transition-all hover:shadow-lg lg:col-span-1">
             <div className="text-xs uppercase tracking-wider text-muted-foreground">Пакет</div>
             <h3 className="mt-2 font-display text-2xl leading-tight">20 терапии</h3>
             <div className="mt-4">
