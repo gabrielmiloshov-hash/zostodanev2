@@ -6,6 +6,7 @@ import {
   useRouter,
   HeadContent,
   Scripts,
+  type ErrorComponentProps,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
@@ -34,7 +35,7 @@ function NotFoundComponent() {
   );
 }
 
-function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
+function ErrorComponent({ error, reset }: ErrorComponentProps) {
   console.error(error);
   const router = useRouter();
   useEffect(() => {
@@ -75,24 +76,24 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Зошто да не? — Рехабилитационен центар | mHBOT и Red Light терапија" },
+      { title: "Зошто да не? | Центар за wellness и благосостојба" },
       {
         name: "description",
         content:
-          "Рехабилитационен центар „Зошто да не?“ во Скопје — хипербарична кислородна терапија (mHBOT) и биофотомодуларна терапија за природно закрепнување.",
+          "Центарот „Зошто да не?“ нуди HBOT и биофотомодулација за одмор, обнова и грижа за себе.",
       },
-      { property: "og:title", content: "Зошто да не? — Рехабилитационен центар" },
+      { property: "og:title", content: "Зошто да не? | Центар за wellness и благосостојба" },
       {
         property: "og:description",
         content:
-          "mHBOT и биофотомодуларна терапија за природно закрепнување, оксигенација и намалување на воспаление.",
+          "HBOT, биофотомодулација и третмани со кислород за одмор, обнова и благосостојба.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: "/favicon.ico?v=2", type: "image/x-icon", sizes: "any" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
