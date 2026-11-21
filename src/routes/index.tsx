@@ -16,13 +16,13 @@ import {
   ChevronRight,
 } from "lucide-react";
 
-import heroAsset from "@/assets/hero-custom.png.asset.json";
+import heroAsset from "@/assets/hero-custom.webp";
 import leavesBg from "@/assets/leaves-bg.jpg";
-import galKomora from "@/assets/galerija-komora.jpg.asset.json";
-import galCentar from "@/assets/galerija-centar.jpg.asset.json";
-import galCrvena2 from "@/assets/galerija-crvena-2.jpg.asset.json";
+import galKomora from "@/assets/galerija-komora.webp";
+import galCentar from "@/assets/galerija-centar.webp";
+import galCrvena2 from "@/assets/galerija-crvena-2.webp";
 
-const heroImg = heroAsset.url;
+const heroImg = heroAsset;
 
 import { Gallery } from "@/components/Gallery";
 import { normobaricPackages } from "@/lib/treatment-pricing";
@@ -105,7 +105,7 @@ function Hero() {
       label: "Надвор од центарот",
     },
     {
-      src: galCentar.url,
+      src: galCentar,
       alt: "Внатрешност на центарот Зошто да не",
       label: "Внатре во центарот",
     },
@@ -371,7 +371,7 @@ function Therapy() {
           <div className="rounded-3xl border border-border/60 bg-cream/40 p-8 md:p-10">
             <div className="mb-4 overflow-hidden rounded-2xl border border-border/60">
               <img
-                src={galKomora.url}
+                src={galKomora}
                 alt="Комора за хипербаричен третман со кислород (HBOT)"
                 width={1200}
                 height={900}
@@ -430,7 +430,7 @@ function Therapy() {
           <div className="rounded-3xl border border-border/60 bg-mint/20 p-8 md:p-10">
             <div className="mb-4 overflow-hidden rounded-2xl border border-border/60">
               <img
-                src={galCrvena2.url}
+                src={galCrvena2}
                 alt="Панел за биофотомодулација со црвена светлина"
                 width={1200}
                 height={900}
