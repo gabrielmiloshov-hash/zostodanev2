@@ -30,7 +30,7 @@ import { normobaricPackages } from "@/lib/treatment-pricing";
 export const Route = createFileRoute("/")({
   component: Home,
   head: () => ({
-    title: "Зошто да не? | Центар за wellness и благосостојба",
+    title: "Здружение на граѓани „Зошто да не?“",
     meta: [
       {
         name: "description",
@@ -39,7 +39,7 @@ export const Route = createFileRoute("/")({
       },
       {
         property: "og:title",
-        content: "Зошто да не? | Центар за wellness и благосостојба",
+        content: "Здружение на граѓани „Зошто да не?“",
       },
       {
         property: "og:description",
@@ -173,7 +173,7 @@ function Hero() {
             Зошто да не?
           </h1>
           <p className="mt-6 max-w-lg text-lg leading-relaxed text-muted-foreground">
-            Центар за рехабилитација и биофотомодулација — простор посветен на вашата благосостојба, со благи хипербарични третмани со кислород (mHBOT), биофотомодулација со црвена светлина, нормобаричен кислород и 3D Zero Gravity релаксација.
+            Здружение на граѓани „Зошто да не?“ — простор посветен на вашата благосостојба, со благи хипербарични третмани со кислород (mHBOT), биофотомодулација со црвена светлина, нормобаричен кислород и 3D Zero Gravity релаксација.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <a
@@ -384,9 +384,9 @@ function Therapy() {
 
         <div className="mt-10 max-w-3xl space-y-3 text-sm leading-relaxed text-muted-foreground">
           <p>Третманите се достапни на членовите од здружението, кои плаќаат месечна членарина.</p>
-          <p>Третманите се изведуваат од понеделник до петок; саботите и неделите корисниците одмораат.</p>
-          <p>Плаќањето на третманите се врши однапред, преку уплата на жиро сметка на здружението.</p>
-          <p>Единствениот дополнителен трошок е канила или маска за приклучок на кислород, што ја купувате вие. Ако не можете самостојно да набавите соодветна канила или маска може и ние да ви ја обезбедиме.</p>
+          <p>Третманите се изведуваат со закажување, од понеделник до петок; саботите и неделите корисниците одмораат.</p>
+          <p>Плаќањето на третманите се врши однапред и исклучиво безготовински, преку уплата на жиро сметка на подружницата (не се плаќа во готовина на локацијата).</p>
+          <p>Единствениот дополнителен трошок е канила или маска за приклучок на кислород, која ја набавува самиот корисник.</p>
         </div>
 
         <div className="mt-20 grid gap-8 lg:grid-cols-2">
@@ -862,11 +862,8 @@ function Footer() {
               <div className="grid h-9 w-9 place-items-center rounded-full bg-primary/15 text-primary">
                 <Leaf className="h-4 w-4" />
               </div>
-              <span className="font-display text-lg">Здружение „Зошто да не?“</span>
+              <span className="font-display text-lg">Здружение на граѓани „Зошто да не?“</span>
             </div>
-            <p className="mt-3 max-w-xs text-sm text-muted-foreground">
-              Центар за рехабилитација и биофотомодулација.
-            </p>
           </div>
           <div>
             <div className="text-xs uppercase tracking-wider text-muted-foreground">Навигација</div>
@@ -899,11 +896,10 @@ function Footer() {
           </div>
         </div>
         <div className="mt-10 space-y-2 border-t border-border/60 pt-6 text-center text-xs leading-relaxed text-muted-foreground">
-          <p className="font-display text-sm text-foreground">Зошто да не?</p>
-          <p>Центар за рехабилитација и биофотомодулација.</p>
+          <p className="font-display text-sm text-foreground">Здружение на граѓани „Зошто да не?“</p>
           <p>Простор за одмор, обнова и грижа за себе.</p>
           <p className="mx-auto max-w-2xl">Напомена: Историските и регулаторните податоци се однесуваат на научни истражувања и медицински уреди. Третманите имаат релаксирачки карактер и се дополнителна поддршка за општата благосостојба, а не замена за медицински третман.</p>
-          <p>© 2026 Здружение „Зошто да не?“. Сите права задржани.</p>
+          <p>© 2026 Здружение на граѓани „Зошто да не?“. Сите права задржани.</p>
         </div>
       </div>
     </footer>

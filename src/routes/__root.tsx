@@ -76,13 +76,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Зошто да не? | Центар за wellness и благосостојба" },
+      { title: "Здружение на граѓани „Зошто да не?“" },
       {
         name: "description",
         content:
           "Центарот „Зошто да не?“ нуди mHBOT и биофотомодулација за одмор, обнова и грижа за себе.",
       },
-      { property: "og:title", content: "Зошто да не? | Центар за wellness и благосостојба" },
+      { property: "og:title", content: "Здружение на граѓани „Зошто да не?“" },
       {
         property: "og:description",
         content:
