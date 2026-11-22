@@ -58,6 +58,7 @@ function Home() {
       <Nav />
       <Hero />
       <About />
+      <Science />
       <Therapy />
       <NormobaricTherapy />
       <HowItWorks />
@@ -172,9 +173,7 @@ function Hero() {
             Зошто да не?
           </h1>
           <p className="mt-6 max-w-lg text-lg leading-relaxed text-muted-foreground">
-            Центар посветен на вашата благосостојба, со хипербарични третмани
-            со кислород (HBOT) и биофотомодулација со црвена светлина.
-            Мирен простор за одмор, обнова и грижа за себе.
+            Центар за рехабилитација и биофотомодулација — простор посветен на вашата благосостојба, со благи хипербарични третмани со кислород (mHBOT), биофотомодулација со црвена светлина, нормобаричен кислород и 3D Zero Gravity релаксација. Мирен простор за одмор, обнова и грижа за себе.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <a
@@ -280,7 +279,7 @@ function About() {
           <div className="mt-8 space-y-6 text-left">
             <div className="rounded-3xl border border-border/60 bg-mint/20 p-8 md:p-10">
               <p className="text-lg leading-relaxed text-foreground">
-                Мисијата на нашето здружение е да ги направи современите третмани достапни за сите граѓани. Веруваме дека грижата за себе не треба да биде луксуз. Секој заслужува простор каде може да забави, да одмори и да посвети внимание на својата благосостојба.
+                Мисијата на здружението „Зошто да не?“ е современите третмани за обнова и релаксација да бидат подостапни, нудејќи мирна средина, индивидуално внимание и сертифициран тим кој ги следи современите стандарди за благи хипербарични третмани со кислород (mHBOT) и биофотомодулација.
               </p>
             </div>
             <div className="rounded-3xl border border-border/60 bg-card p-8 md:p-10">
@@ -299,6 +298,38 @@ function About() {
               </p>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Science() {
+  const items = [
+    { t: "Хипербарична оксигенација (HBOT)", d: "Има две главни историски насоки — Советската школа (СССР, 60-ти и 70-ти години) каде HBOT масовно се истражувал за системска регенерација во неврологијата, дерматологијата, психијатријата и кардиоваскуларната медицина; и американската регулатива каде со американската морнарица и UHMS, Американската агенција за храна и лекови (FDA) официјално ја одобри употребата за 14 клинички состојби (вклучувајќи дијабетично стапало, тешки рани, труење со јаглерод моноксид, декомпресиска болест и други), додека дополнително широко се проучува и за пост-мозочен удар, спортски повреди и пост-ковид исцрпеност.", s: "Советска школа / FDA ознаки" },
+    { t: "Биофотомодулација", d: "Откриена и истражувана од НАСА во доцните 80-ти и 90-ти години преку LED панели со црвена и блиска инфрацрвена светлина кои ја стимулираат митохондријалната функција и ATP енергијата. Врз основа на тоа, американската FDA издаде одобренија за олеснување на мускулно-зглобни болки, подобра локална циркулација, дерматолошка нега (колаген, акни, брчки), раст на косата и забрзано заздравување.", s: "НАСА / FDA одобренија" },
+    { t: "3D Zero Gravity положба", d: "Развиена за време на вселенските мисии Скајлаб во 70-тите години од страна на НАСА (Neutral Body Posture), каде на агол од ~128 степени се намалува притисокот врз ’рбетот и зглобовите и се подобруваат циркулацијата и дишењето, наоѓајќи широка примена кај ’рбетни и циркулаторни оптоварувања.", s: "Мисии Скајлаб / НАСА" },
+  ];
+  return (
+    <section id="nauka" className="border-t border-border/50">
+      <div className="mx-auto max-w-6xl px-6 py-24">
+        <div className="max-w-3xl">
+          <span className="text-xs uppercase tracking-[0.2em] text-primary">Научна основа и историја</span>
+          <h2 className="mt-4 font-display text-4xl leading-tight md:text-5xl">
+            Технологија инспирирана од науката, прилагодена за вас.
+          </h2>
+          <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
+            Третманите што ги применуваме во нашиот центар се темелат на децениски меѓународни научни истражувања и регулаторни стандарди:
+          </p>
+        </div>
+        <div className="mt-12 grid gap-6 md:grid-cols-3">
+          {items.map((i) => (
+            <div key={i.t} className="rounded-3xl border border-border/60 bg-card p-7">
+              <h3 className="font-display text-xl">{i.t}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{i.d}</p>
+              <p className="mt-4 text-xs uppercase tracking-wider text-primary">[{i.s}]</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -506,7 +537,7 @@ function NormobaricTherapy() {
               <strong className="text-foreground">Нормобаричниот оксиген третман</strong> е седење во пријатна, мирна средина додека дишете чист кислород преку назална канила или маска на нормален атмосферски притисок. За разлика од хипербаричниот третман, тука не влегувате во комора и не чувствувате притисок во ушите. Тоа го прави третманот релаксирана опција за одмор и грижа за себе, со претходен разговор за вашите потреби.
             </p>
             <p>
-              Во нашиот центар овој третман го комбинираме со биофотомодулација. Во текот на 30 минути чистиот кислород се диши истовремено додека светлинските панели со црвена и блиска инфрацрвена светлина ја стимулираат кожата и ткивата. Комбинацијата е наменета за одмор, поддршка на природната обнова и чувство на свежина.
+              <strong className="text-foreground">Нормобаричен оксиген третман + 3D Zero Gravity + Биофотомодулација.</strong> Пакетот комбинира 30-минутен престој во 3D Zero Gravity фотелја во бестежинска положба, вдишување чист кислород на нормален притисок и активна стимулација со панели со црвена и инфрацрвена светлина за подобрување на кожата, циркулацијата, сонот и мускулното закрепнување. Сè се одвива истовремено, во мирна и опуштена атмосфера.
             </p>
             <p>
               Оваа комбинација е одличен избор за сите кои сакаат природна поддршка за организмот без потреба од влегување во хипербарична комора. Третманите се достапни во пакет од 20 посети, со распоред усогласен со вашите потреби.
@@ -514,11 +545,11 @@ function NormobaricTherapy() {
           </div>
         </div>
 
-        <div className="mt-14 max-w-md">
+        <div className="mt-14 grid max-w-3xl gap-6 sm:grid-cols-2">
           {normobaricPackages.map((offer) => (
           <div key={offer.treatments} className="rounded-3xl border border-border/60 bg-card p-8 shadow-sm transition-all hover:shadow-lg">
             <div className="text-xs uppercase tracking-wider text-muted-foreground">Пакет</div>
-            <h3 className="mt-2 font-display text-2xl leading-tight">{offer.treatments} третмани</h3>
+            <h3 className="mt-2 font-display text-2xl leading-tight">{offer.treatments} {offer.treatments === 1 ? "третман" : "третмани"}</h3>
             <div className="mt-4">
               <span className="font-display text-4xl text-primary">{offer.priceDenars.toLocaleString("de-DE")}</span>
               <span className="text-lg text-muted-foreground"> денари</span>
@@ -876,8 +907,12 @@ function Footer() {
             </div>
           </div>
         </div>
-        <div className="mt-10 border-t border-border/60 pt-6 text-center text-xs text-muted-foreground">
-          © {new Date().getFullYear()} Здружение „Зошто да не?“. Сите права задржани.
+        <div className="mt-10 space-y-2 border-t border-border/60 pt-6 text-center text-xs leading-relaxed text-muted-foreground">
+          <p className="font-display text-sm text-foreground">Зошто да не?</p>
+          <p>Центар за рехабилитација и биофотомодулација.</p>
+          <p>Простор за одмор, обнова и грижа за себе.</p>
+          <p className="mx-auto max-w-2xl">Напомена: Историските и регулаторните податоци се однесуваат на научни истражувања и медицински уреди. Третманите имаат релаксирачки карактер и се дополнителна поддршка за општата благосостојба, а не замена за медицински третман.</p>
+          <p>© 2026 Здружение „Зошто да не?“. Сите права задржани.</p>
         </div>
       </div>
     </footer>
