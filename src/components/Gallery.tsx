@@ -43,9 +43,9 @@ const groups = [
   },
   {
     label: "Хипербарична комора",
-    caption: "Комората во која се изведува HBOT.",
+    caption: "Комората во која се изведува mHBOT.",
     items: [
-      { src: gKomoraNova, alt: "Хипербарична комора за HBOT третман" },
+      { src: gKomoraNova, alt: "Хипербарична комора за mHBOT третман" },
       { src: gKomora2, alt: "Хипербаричната комора со концентратори за кислород во просторијата" },
       { src: gKomora3, alt: "Отворена врата на хипербаричната комора со фотелата внатре" },
       { src: gKomora4, alt: "Поглед кон внатрешноста на хипербаричната комора" },
@@ -70,9 +70,6 @@ export function Gallery() {
       <div className="mx-auto max-w-6xl px-6 py-24">
         <div className="max-w-2xl">
           <span className="text-xs uppercase tracking-[0.2em] text-primary">Галерија</span>
-          <h2 className="mt-4 font-display text-4xl leading-tight md:text-5xl">
-            Уште малку од нашиот центар.
-          </h2>
         </div>
 
         <div className="mt-14 space-y-14">

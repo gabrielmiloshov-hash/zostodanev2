@@ -80,13 +80,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "Центарот „Зошто да не?“ нуди HBOT и биофотомодулација за одмор, обнова и грижа за себе.",
+          "Центарот „Зошто да не?“ нуди mHBOT и биофотомодулација за одмор, обнова и грижа за себе.",
       },
       { property: "og:title", content: "Зошто да не? | Центар за wellness и благосостојба" },
       {
         property: "og:description",
         content:
-          "HBOT, биофотомодулација и третмани со кислород за одмор, обнова и благосостојба.",
+          "mHBOT, биофотомодулација и третмани со кислород за одмор, обнова и благосостојба.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
